@@ -86,4 +86,5 @@ resource "aws_cloudtrail" "this" {
   include_global_service_events = true
   is_multi_region_trail         = true
   s3_bucket_name                = module.s3-bucket.s3_bucket_id
+  kms_key_id                    = var.kms_key_arn
 }
