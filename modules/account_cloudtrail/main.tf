@@ -1,9 +1,4 @@
-data "aws_partition" "current" {}
 data "aws_caller_identity" "current" {}
-
-locals {
-  arn_format = "arn:${data.aws_partition.current.partition}"
-}
 
 module "s3-bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
