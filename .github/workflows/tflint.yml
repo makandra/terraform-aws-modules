@@ -1,0 +1,41 @@
+name: Lint
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  tflint:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        path:
+          - account_billing_alert
+          - account_cloudtrail
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout source code
+
+    - uses: actions/cache@v2
+      name: Cache plugin dir
+      with:
+        path: ~/.tflint.d/plugins
+        key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
+
+    - uses: terraform-linters/setup-tflint@v2
+      name: Setup TFLint
+      with:
+        tflint_version: v0.42.2
+
+    - name: Show version
+      run: tflint --version
+
+    - name: Init TFLint
+      working-directory: modules/${{ matrix.path }}
+      run: tflint --init
+
+    - name: Run TFLint
+      working-directory: modules/${{ matrix.path }}
+      run: tflint -f compact
