@@ -15,7 +15,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_billing"></a> [billing](#module\_billing) | ../.. | n/a |
+| <a name="module_cloudtrail"></a> [cloudtrail](#module\_cloudtrail) | ../.. | n/a |
 
 ## Resources
 
