@@ -20,6 +20,3 @@ jobs:
         with:
           directory: modules/
           framework: terraform
-          # CKV_AWS_252 is optional and not required
-          # CKV2_AWS_10 is optional and not required
-          skip_check: CKV_AWS_252,CKV2_AWS_10

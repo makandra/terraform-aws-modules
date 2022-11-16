@@ -85,6 +85,8 @@ data "aws_iam_policy_document" "bucket_policy" {
 }
 
 resource "aws_cloudtrail" "this" {
+  #checkov:skip=CKV_AWS_252:This is optional and not required
+  #checkov:skip=CKV2_AWS_10:This is optional and not required
   name                          = local.cloudtrail_name
   enable_log_file_validation    = true
   enable_logging                = true
