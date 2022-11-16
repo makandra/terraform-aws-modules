@@ -72,7 +72,7 @@ data "aws_iam_policy_document" "bucket_policy" {
       "s3:PutObject",
     ]
     resources = [
-      module.s3-bucket.s3_bucket_arn,
+      "${module.s3-bucket.s3_bucket_arn}/*",
     ]
     condition {
       test     = "StringEquals"
