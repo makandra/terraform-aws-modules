@@ -13,6 +13,7 @@ jobs:
         path:
           - account_billing_alert
           - account_cloudtrail
+          - RDSOSMetrics_loggroup
 
     steps:
     - uses: actions/checkout@v2
