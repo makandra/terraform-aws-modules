@@ -1,10 +1,15 @@
 data "aws_caller_identity" "current" {}
 
+locals {
+  cloudtrail_name = var.cloudtrail_name == null ? "cloudtrail-${data.aws_caller_identity.current.account_id}" : var.cloudtrail_name
+}
+
 module "s3-bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "3.6.0"
 
-  bucket_prefix           = "cloudtrail-${data.aws_caller_identity.current.account_id}-"
+  bucket                  = var.s3_bucket_name
+  bucket_prefix           = var.s3_bucket_name == null ? "cloudtrail-${data.aws_caller_identity.current.account_id}-" : null
   acl                     = "private"
   attach_policy           = true
   policy                  = data.aws_iam_policy_document.bucket_policy.json
@@ -80,7 +85,7 @@ data "aws_iam_policy_document" "bucket_policy" {
 }
 
 resource "aws_cloudtrail" "this" {
-  name                          = "cloudtrail-${data.aws_caller_identity.current.account_id}"
+  name                          = local.cloudtrail_name
   enable_log_file_validation    = true
   enable_logging                = true
   include_global_service_events = true

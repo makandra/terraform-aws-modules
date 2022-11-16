@@ -3,3 +3,15 @@ variable "kms_key_arn" {
   type        = string
   default     = null
 }
+
+variable "s3_bucket_name" {
+  description = "The name of the S3 bucket to store cloudtrail logs in. This is optional and defaults to a prefix with cloudtrail-<ACCOUNTID>-."
+  type        = string
+  default     = null
+}
+
+variable "cloudtrail_name" {
+  description = "The name of the cloudtrail. This is optional and defaults to cloudtrail-<ACCOUNTID>."
+  type        = string
+  default     = null
+}
