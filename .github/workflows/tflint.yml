@@ -18,4 +18,4 @@ jobs:
     steps:
     - uses: makandra/github-actions/tflint@main
       with:
-        path: ${{ matrix.path }}
+        path: modules/${{ matrix.path }}
