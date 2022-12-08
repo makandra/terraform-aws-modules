@@ -1,4 +1,4 @@
-name: Lint
+name: Tflint
 on:
   push:
     branches: [ main ]
@@ -16,27 +16,6 @@ jobs:
           - RDSOSMetrics_loggroup
 
     steps:
-    - uses: actions/checkout@v2
-      name: Checkout source code
-
-    - uses: actions/cache@v2
-      name: Cache plugin dir
+    - uses: makandra/github-actions/tflint@main
       with:
-        path: ~/.tflint.d/plugins
-        key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
-
-    - uses: terraform-linters/setup-tflint@v2
-      name: Setup TFLint
-      with:
-        tflint_version: v0.42.2
-
-    - name: Show version
-      run: tflint --version
-
-    - name: Init TFLint
-      working-directory: modules/${{ matrix.path }}
-      run: tflint --init
-
-    - name: Run TFLint
-      working-directory: modules/${{ matrix.path }}
-      run: tflint -f compact
+        path: ${{ matrix.path }}
