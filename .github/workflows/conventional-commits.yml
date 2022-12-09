@@ -2,9 +2,14 @@ name: Conventional Commits
 
 on:
   pull_request:
+  push:
+    branches:
+      - master
+      - main
+
 
 jobs:
-  build:
+  conventional-commits:
     name: Conventional Commits
     runs-on: ubuntu-latest
     steps:

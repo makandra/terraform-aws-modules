@@ -1,20 +1,21 @@
 name: Tflint
 on:
-  push:
-    branches: [ main ]
   pull_request:
+  push:
+    branches:
+      - master
+      - main
+
 
 jobs:
   tflint:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         path:
           - account_billing_alert
           - account_cloudtrail
           - RDSOSMetrics_loggroup
-
     steps:
     - uses: makandra/github-actions/tflint@main
       with:

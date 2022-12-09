@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - master
+      - main
 jobs:
-  build:
-
+  checkov:
     runs-on: ubuntu-latest
     steps:
       - uses: makandra/github-actions/checkov-terraform@main
