@@ -5,7 +5,12 @@ on:
       - master
       - main
 jobs:
-  publish:
+  release:
+    needs:
+      - checkov
+      - tflint
+      - pre-commit
+      - conventional-commits
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
