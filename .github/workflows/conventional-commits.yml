@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  conventional-commits:
     name: Conventional Commits
     runs-on: ubuntu-latest
     steps:

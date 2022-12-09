@@ -1,9 +1,12 @@
-name:  "Semantic-Release"
+name: "Semantic-Release"
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - master
+      - main
+
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
