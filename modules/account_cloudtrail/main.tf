@@ -2,6 +2,20 @@ data "aws_caller_identity" "current" {}
 
 locals {
   cloudtrail_name = var.cloudtrail_name == null ? "cloudtrail-${data.aws_caller_identity.current.account_id}" : var.cloudtrail_name
+  s3_encryption_configuration = var.kms_key_arn == null ? {
+    rule = {
+      apply_server_side_encryption_by_default = {
+        sse_algorithm = "AES256"
+      }
+    }
+    } : {
+    rule = {
+      apply_server_side_encryption_by_default = {
+        kms_master_key_id = var.kms_key_arn
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
 }
 
 module "s3-bucket" {
@@ -38,13 +52,7 @@ module "s3-bucket" {
     }
   ]
 
-  server_side_encryption_configuration = {
-    rule = {
-      apply_server_side_encryption_by_default = {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
+  server_side_encryption_configuration = local.s3_encryption_configuration
 }
 
 data "aws_iam_policy_document" "bucket_policy" {
