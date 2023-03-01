@@ -11,6 +11,7 @@ jobs:
         path:
           - account_billing_alert
           - account_cloudtrail
+          - iam_sso
           - RDSOSMetrics_loggroup
     steps:
     - uses: makandra/github-actions/tflint@main
