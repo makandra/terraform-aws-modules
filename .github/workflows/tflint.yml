@@ -11,6 +11,7 @@ jobs:
         path:
           - account_billing_alert
           - account_cloudtrail
+          - eks
           - iam_sso
           - RDSOSMetrics_loggroup
     steps:
