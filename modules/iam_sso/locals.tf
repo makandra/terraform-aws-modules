@@ -30,8 +30,9 @@ locals {
     ] if group_config.account_assignments != null
   ])
 
-  # for the group assignments to all accounts we create a list of the combinations of group/permissionset and account IDs
-  groups_for_all_accounts = length(local.groups_to_assign_to_all_accounts) > 0 ? setproduct(local.groups_to_assign_to_all_accounts, data.aws_organizations_organization.this.accounts[*].id) : []
+  # for the group assignments to all accounts we create a list of the combinations of group/permissionset and account IDs of active accounts
+  list_of_active_account_ids = [for account in data.aws_organizations_organization.this.accounts : account.id if account.status == "ACTIVE"]
+  groups_for_all_accounts    = length(local.groups_to_assign_to_all_accounts) > 0 ? setproduct(local.groups_to_assign_to_all_accounts, local.list_of_active_account_ids) : []
 
   # build a list of all user assignments to the given accounts
   user_assignments = flatten([
