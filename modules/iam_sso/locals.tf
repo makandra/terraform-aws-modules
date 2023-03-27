@@ -6,7 +6,7 @@ locals {
         user_id  = aws_identitystore_user.this[user].user_id
         group_id = aws_identitystore_group.this[group].group_id
       }
-    ]
+    ] if user_config.group_memberships != null
   ])
 
   # build a list of all groups to assign to the given accounts
