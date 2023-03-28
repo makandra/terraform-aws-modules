@@ -33,47 +33,47 @@ resource "aws_identitystore_user" "this" {
 }
 
 resource "aws_identitystore_group_membership" "this" {
-  count             = length(local.group_memberships)
+  for_each          = local.group_memberships
   identity_store_id = tolist(data.aws_ssoadmin_instances.this.identity_store_ids)[0]
-  group_id          = local.group_memberships[count.index].group_id
-  member_id         = local.group_memberships[count.index].user_id
+  group_id          = each.value.group_id
+  member_id         = each.value.user_id
 }
 
 resource "aws_ssoadmin_account_assignment" "groups" {
-  count        = length(local.group_assignments)
+  for_each     = local.group_assignments
   instance_arn = tolist(data.aws_ssoadmin_instances.this.arns)[0]
 
-  permission_set_arn = local.group_assignments[count.index].permission_set_arn
+  permission_set_arn = each.value.permission_set_arn
 
-  principal_id   = local.group_assignments[count.index].group_id
+  principal_id   = each.value.group_id
   principal_type = "GROUP"
 
-  target_id   = local.group_assignments[count.index].account_number
+  target_id   = each.value.account_number
   target_type = "AWS_ACCOUNT"
 }
 
 resource "aws_ssoadmin_account_assignment" "groups_all_accounts" {
-  count        = length(local.groups_for_all_accounts)
+  for_each     = local.group_all_account_assignments
   instance_arn = tolist(data.aws_ssoadmin_instances.this.arns)[0]
 
-  permission_set_arn = local.groups_for_all_accounts[count.index][0].permission_set_arn
+  permission_set_arn = each.value.permission_set_arn
 
-  principal_id   = local.groups_for_all_accounts[count.index][0].group_id
+  principal_id   = each.value.group_id
   principal_type = "GROUP"
 
-  target_id   = local.groups_for_all_accounts[count.index][1]
+  target_id   = each.value.account_number
   target_type = "AWS_ACCOUNT"
 }
 
 resource "aws_ssoadmin_account_assignment" "users" {
-  count        = length(local.user_assignments)
+  for_each     = local.user_assignments
   instance_arn = tolist(data.aws_ssoadmin_instances.this.arns)[0]
 
-  permission_set_arn = local.user_assignments[count.index].permission_set_arn
+  permission_set_arn = each.value.permission_set_arn
 
-  principal_id   = local.user_assignments[count.index].user_id
+  principal_id   = each.value.user_id
   principal_type = "USER"
 
-  target_id   = local.user_assignments[count.index].account_number
+  target_id   = each.value.account_number
   target_type = "AWS_ACCOUNT"
 }
