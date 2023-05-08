@@ -1,0 +1,32 @@
+function handler(event) {
+  var request = event.request;
+  var authHeaders = request.headers.authorization;
+  var uri = request.uri;
+
+  if (uri.startsWith("/")) {
+    var expected = ${basic_auth};
+
+    if (authHeaders && expected.includes(authHeaders.value)) {
+      if (uri.endsWith('/')) {
+          request.uri += 'index.html';
+      }
+      else if (!uri.includes('.')) {
+          request.uri += '/index.html';
+      }
+
+      return event.request;
+    }
+
+    var response = {
+      statusCode: 401,
+      statusDescription: "Unauthorized",
+      headers: {
+        "www-authenticate": {
+          value: 'Basic realm="Enter credentials"',
+        },
+      },
+    };
+    return response;
+  }
+return event.request;
+}
