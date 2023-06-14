@@ -32,7 +32,7 @@ variable "permission_sets" {
   type = list(object({
     name                = string
     description         = string
-    policy_attachments  = optional(list(string))
+    policy_attachments  = optional(list(string), [])
     managed_policy_arns = optional(list(string))
     inline_policy       = optional(string, "")
     relay_state         = optional(string, "")
