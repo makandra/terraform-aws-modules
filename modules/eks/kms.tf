@@ -1,6 +1,7 @@
 data "aws_iam_policy_document" "eks_ebs" {
   #checkov:skip=CKV_AWS_111: Does not apply here because KMS key policies only apply to the key itself. (https://docs.bridgecrew.io/docs/ensure-iam-policies-do-not-allow-write-access-without-constraint)
   #checkov:skip=CKV_AWS_109: Does not apply here because KMS key policies only apply to the key itself. (https://docs.bridgecrew.io/docs/ensure-iam-policies-do-not-allow-permissions-management-resource-exposure-without-constraint)
+  #checkov:skip=CKV_AWS_356:Does not apply here because KMS key policies only apply to the key itself.
   statement {
     sid       = "Enable IAM User Permissions"
     actions   = ["kms:*"]
@@ -97,6 +98,7 @@ resource "aws_kms_alias" "eks_logging" {
 data "aws_iam_policy_document" "eks_logging" {
   #checkov:skip=CKV_AWS_111: Does not apply here because KMS key policies only apply to the key itself. (https://docs.bridgecrew.io/docs/ensure-iam-policies-do-not-allow-write-access-without-constraint)
   #checkov:skip=CKV_AWS_109: Does not apply here because KMS key policies only apply to the key itself. (https://docs.bridgecrew.io/docs/ensure-iam-policies-do-not-allow-permissions-management-resource-exposure-without-constraint)
+  #checkov:skip=CKV_AWS_356:Does not apply here because KMS key policies only apply to the key itself.
   policy_id = "key-policy-cloudwatch"
   statement {
     sid = "Enable IAM User Permissions"

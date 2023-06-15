@@ -5,6 +5,7 @@ data "aws_region" "current" {}
 data "aws_iam_policy_document" "RDSOS_KMS" {
   #checkov:skip=CKV_AWS_109:This is required for a working KMS key policy
   #checkov:skip=CKV_AWS_111:This is required for a working KMS key policy
+  #checkov:skip=CKV_AWS_356:Does not apply here because KMS key policies only apply to the key itself.
   count     = var.create_kms_key ? 1 : 0
   policy_id = "key-policy-cloudwatch"
   statement {

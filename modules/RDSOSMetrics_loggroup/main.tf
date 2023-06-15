@@ -4,6 +4,7 @@ locals {
 }
 
 resource "aws_cloudwatch_log_group" "this" {
+  #checkov:skip=CKV_AWS_338:Logs retention time does not always have to be at least 1 year
   name              = "RDSOSMetrics"
   retention_in_days = var.log_rentention_days
   kms_key_id        = local.kms_key_id
