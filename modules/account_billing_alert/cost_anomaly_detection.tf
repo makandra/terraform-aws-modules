@@ -8,8 +8,15 @@ resource "aws_ce_anomaly_monitor" "service_monitor" {
 resource "aws_ce_anomaly_subscription" "service_monitor_subscritpion" {
   count     = var.anomaly_detection_threshold == 0 ? 0 : 1
   name      = "DAILYSUBSCRIPTION"
-  threshold = var.anomaly_detection_threshold
   frequency = "DAILY"
+
+  threshold_expression {
+    dimension {
+      key           = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
+      match_options = ["GREATER_THAN_OR_EQUAL"]
+      values        = [var.anomaly_detection_threshold]
+    }
+  }
 
   monitor_arn_list = [
     aws_ce_anomaly_monitor.service_monitor[0].arn,
