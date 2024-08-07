@@ -1,0 +1,3 @@
+skip-check:
+# modules
+  - CKV_TF_1 # We are fine just using the module tag for the source

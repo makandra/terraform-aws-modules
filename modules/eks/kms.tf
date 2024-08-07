@@ -60,6 +60,7 @@ data "aws_iam_policy_document" "eks_ebs" {
 }
 
 resource "aws_kms_key" "eks" {
+  #checkov:skip=CKV2_AWS_64: We do not need a resource policy for this key
   description             = "EKS Secret Encryption Key"
   deletion_window_in_days = 7
   enable_key_rotation     = true
