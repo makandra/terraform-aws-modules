@@ -1,3 +1,11 @@
+# ⚠️ Unmaintained ⚠️
+
+This module is currently in an unusable state.
+
+We try to update it in the future but we advise you to not use it at the moment. We leave it here as-is for everyonne that is already using/depending on it.
+
+# Readme
+
 Module configures basic components for EKS. Wrapping the [AWS EKS Terraform module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest).
 
 See the example section to see how the module can be used.
