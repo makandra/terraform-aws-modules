@@ -1,8 +1,12 @@
 data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
 
 locals {
-  cloudtrail_name = var.cloudtrail_name == null ? "cloudtrail-${data.aws_caller_identity.current.account_id}" : var.cloudtrail_name
-  s3_encryption_configuration = var.kms_key_arn == null ? {
+  account_id      = data.aws_caller_identity.current.account_id
+  cloudtrail_name = var.cloudtrail_name == null ? "cloudtrail-${local.account_id}" : var.cloudtrail_name
+  kms_key_arn     = var.create_kms_key ? module.kms.key_arn : var.kms_key_arn
+  region          = data.aws_region.current.name
+  s3_encryption_configuration = local.kms_key_arn == null ? {
     rule = {
       apply_server_side_encryption_by_default = {
         sse_algorithm = "AES256"
@@ -11,7 +15,7 @@ locals {
     } : {
     rule = {
       apply_server_side_encryption_by_default = {
-        kms_master_key_id = var.kms_key_arn
+        kms_master_key_id = local.kms_key_arn
         sse_algorithm     = "aws:kms"
       }
     }
@@ -23,7 +27,7 @@ module "s3-bucket" {
   version = "3.6.0"
 
   bucket                  = var.s3_bucket_name
-  bucket_prefix           = var.s3_bucket_name == null ? "cloudtrail-${data.aws_caller_identity.current.account_id}-" : null
+  bucket_prefix           = var.s3_bucket_name == null ? "cloudtrail-${local.account_id}-" : null
   acl                     = "private"
   attach_policy           = true
   policy                  = data.aws_iam_policy_document.bucket_policy.json
@@ -44,10 +48,10 @@ module "s3-bucket" {
         prefix = "/"
       }
       expiration = {
-        days = 365
+        days = var.s3_lifecycle_expiration
       }
       noncurrent_version_expiration = {
-        days = 180
+        days = var.s3_lifecycle_noncurrent_expiration
       }
     }
   ]
@@ -101,5 +105,5 @@ resource "aws_cloudtrail" "this" {
   include_global_service_events = true
   is_multi_region_trail         = true
   s3_bucket_name                = module.s3-bucket.s3_bucket_id
-  kms_key_id                    = var.kms_key_arn
+  kms_key_id                    = local.kms_key_arn
 }
