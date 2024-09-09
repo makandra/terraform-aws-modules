@@ -24,7 +24,7 @@ locals {
 
 module "s3-bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "3.6.0"
+  version = "4.1.2"
 
   bucket                  = var.s3_bucket_name
   bucket_prefix           = var.s3_bucket_name == null ? "cloudtrail-${local.account_id}-" : null
