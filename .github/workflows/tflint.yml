@@ -11,6 +11,8 @@ jobs:
         path:
           - account_billing_alert
           - account_cloudtrail
+          - alternate_contacts
+          - cf_basic_auth
           - eks
           - iam_sso
           - RDSOSMetrics_loggroup
