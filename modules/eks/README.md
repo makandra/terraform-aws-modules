@@ -56,13 +56,13 @@ See the example section to see how the module can be used.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cluster_enabled_log_types"></a> [cluster\_enabled\_log\_types](#input\_cluster\_enabled\_log\_types) | A list of the desired control plane logs to enable. | `list(string)` | <pre>[<br>  "audit",<br>  "api",<br>  "authenticator",<br>  "scheduler",<br>  "controllerManager"<br>]</pre> | no |
+| <a name="input_cluster_enabled_log_types"></a> [cluster\_enabled\_log\_types](#input\_cluster\_enabled\_log\_types) | A list of the desired control plane logs to enable. | `list(string)` | <pre>[<br/>  "audit",<br/>  "api",<br/>  "authenticator",<br/>  "scheduler",<br/>  "controllerManager"<br/>]</pre> | no |
 | <a name="input_cluster_endpoint_public_access"></a> [cluster\_endpoint\_public\_access](#input\_cluster\_endpoint\_public\_access) | Whether or not to enable public access to the cluster endpoint. | `bool` | `false` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the EKS cluster. | `string` | n/a | yes |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | EKS version to use. See https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html | `string` | n/a | yes |
 | <a name="input_iam_role_rbac_mappings"></a> [iam\_role\_rbac\_mappings](#input\_iam\_role\_rbac\_mappings) | A map of IAM role names to map to Kubernetes RBAC roles. The key is the IAM role name, the value is is a list of the Kubernetes RBAC role names. | `map(list(string))` | `{}` | no |
 | <a name="input_iam_user_rbac_mappings"></a> [iam\_user\_rbac\_mappings](#input\_iam\_user\_rbac\_mappings) | A map of IAM user names to map to Kubernetes RBAC roles. The key is the IAM user name, the value is is a list of the Kubernetes RBAC role names. | `map(list(string))` | `{}` | no |
-| <a name="input_node_groups"></a> [node\_groups](#input\_node\_groups) | Node group definitions for the EKS cluster. | <pre>map(object({<br>    min_size       = number<br>    max_size       = number<br>    desired_size   = number<br>    volume_size    = number<br>    capacity_type  = string<br>    instance_types = list(string)<br>    taints         = optional(any, [])<br>  }))</pre> | n/a | yes |
+| <a name="input_node_groups"></a> [node\_groups](#input\_node\_groups) | Node group definitions for the EKS cluster. | <pre>map(object({<br/>    min_size       = number<br/>    max_size       = number<br/>    desired_size   = number<br/>    volume_size    = number<br/>    capacity_type  = string<br/>    instance_types = list(string)<br/>    taints         = optional(any, [])<br/>  }))</pre> | n/a | yes |
 | <a name="input_private_subnet_ids"></a> [private\_subnet\_ids](#input\_private\_subnet\_ids) | The private subnet IDs EKS nodes are attached to. | `list(string)` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The region where ressources should be managed. | `string` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID EKS will be attached to. | `string` | n/a | yes |
