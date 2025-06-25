@@ -16,6 +16,7 @@ jobs:
           - eks
           - iam_sso
           - RDSOSMetrics_loggroup
+          - oidc_gitlab
     steps:
     - uses: makandra/github-actions/tflint@main
       with:
