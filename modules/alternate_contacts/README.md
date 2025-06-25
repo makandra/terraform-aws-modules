@@ -64,11 +64,11 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_assign_contacts_to_all_accounts"></a> [assign\_contacts\_to\_all\_accounts](#input\_assign\_contacts\_to\_all\_accounts) | If true, assign the alternate contacts to all accounts in the organization. | `bool` | `false` | no |
-| <a name="input_billing_contact"></a> [billing\_contact](#input\_billing\_contact) | Contact data for the billing contact. | <pre>object({<br>    name          = string<br>    title         = string<br>    email_address = string<br>    phone_number  = string<br>  })</pre> | `null` | no |
-| <a name="input_default_alternate_contact"></a> [default\_alternate\_contact](#input\_default\_alternate\_contact) | These defaults are used for all alternate contacts if no specifics are given. | <pre>object({<br>    name          = string<br>    title         = string<br>    email_address = string<br>    phone_number  = string<br>  })</pre> | n/a | yes |
+| <a name="input_billing_contact"></a> [billing\_contact](#input\_billing\_contact) | Contact data for the billing contact. | <pre>object({<br/>    name          = string<br/>    title         = string<br/>    email_address = string<br/>    phone_number  = string<br/>  })</pre> | `null` | no |
+| <a name="input_default_alternate_contact"></a> [default\_alternate\_contact](#input\_default\_alternate\_contact) | These defaults are used for all alternate contacts if no specifics are given. | <pre>object({<br/>    name          = string<br/>    title         = string<br/>    email_address = string<br/>    phone_number  = string<br/>  })</pre> | n/a | yes |
 | <a name="input_filter_accounts"></a> [filter\_accounts](#input\_filter\_accounts) | A list of account IDs to filter the list of accounts to assign alternate contacts to. This is only relevant if assign\_contacts\_to\_all\_accounts is true. | `list(string)` | `[]` | no |
-| <a name="input_operations_contact"></a> [operations\_contact](#input\_operations\_contact) | Contact data for the operations contact. | <pre>object({<br>    name          = string<br>    title         = string<br>    email_address = string<br>    phone_number  = string<br>  })</pre> | `null` | no |
-| <a name="input_security_contact"></a> [security\_contact](#input\_security\_contact) | Contact data for the security contact. | <pre>object({<br>    name          = string<br>    title         = string<br>    email_address = string<br>    phone_number  = string<br>  })</pre> | `null` | no |
+| <a name="input_operations_contact"></a> [operations\_contact](#input\_operations\_contact) | Contact data for the operations contact. | <pre>object({<br/>    name          = string<br/>    title         = string<br/>    email_address = string<br/>    phone_number  = string<br/>  })</pre> | `null` | no |
+| <a name="input_security_contact"></a> [security\_contact](#input\_security\_contact) | Contact data for the security contact. | <pre>object({<br/>    name          = string<br/>    title         = string<br/>    email_address = string<br/>    phone_number  = string<br/>  })</pre> | `null` | no |
 
 ## Outputs
 
