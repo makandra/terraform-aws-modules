@@ -44,4 +44,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_gitlab_role_arn"></a> [gitlab\_role\_arn](#output\_gitlab\_role\_arn) | Role that needs to be assumed by GitLab CI. |
+| <a name="output_oidc_connect_provider_config"></a> [oidc\_connect\_provider\_config](#output\_oidc\_connect\_provider\_config) | Configuration of the aws\_iam\_openid\_connect\_provider. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
