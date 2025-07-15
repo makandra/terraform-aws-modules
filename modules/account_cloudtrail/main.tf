@@ -5,7 +5,7 @@ locals {
   account_id      = data.aws_caller_identity.current.account_id
   cloudtrail_name = var.cloudtrail_name == null ? "cloudtrail-${local.account_id}" : var.cloudtrail_name
   kms_key_arn     = var.create_kms_key ? module.kms.key_arn : var.kms_key_arn
-  region          = data.aws_region.current.name
+  region          = data.aws_region.current.region
   s3_encryption_configuration = local.kms_key_arn == null ? {
     rule = {
       apply_server_side_encryption_by_default = {
@@ -24,11 +24,10 @@ locals {
 
 module "s3-bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "4.1.2"
+  version = "4.11.0"
 
   bucket                  = var.s3_bucket_name
   bucket_prefix           = var.s3_bucket_name == null ? "cloudtrail-${local.account_id}-" : null
-  acl                     = "private"
   attach_policy           = true
   policy                  = data.aws_iam_policy_document.bucket_policy.json
   block_public_acls       = true
