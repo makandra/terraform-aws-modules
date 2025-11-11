@@ -29,7 +29,7 @@ resource "aws_budgets_budget" "account_daily" {
   }
 
   notification {
-    comparison_operator        = "EQUAL_TO"
+    comparison_operator        = "GREATER_THAN"
     threshold                  = var.daily_threshold
     threshold_type             = "PERCENTAGE"
     notification_type          = "ACTUAL"
