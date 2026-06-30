@@ -37,7 +37,7 @@ locals {
   ])
 
   # for the group assignments to all accounts we create a map of the combinations of group/permissionset and account IDs of active accounts
-  list_of_active_account_ids                = [for account in data.aws_organizations_organization.this.accounts : account.id if account.status == "ACTIVE"]
+  list_of_active_account_ids                = [for account in data.aws_organizations_organization.this.accounts : account.id if account.state == "ACTIVE"]
   all_account_groups_account_id_assocations = length(local.groups_to_assign_to_all_accounts) > 0 ? setproduct(local.groups_to_assign_to_all_accounts, local.list_of_active_account_ids) : []
 
   # lastly we create a map of all group assignments to all accounts with the key being the group name and account ID
