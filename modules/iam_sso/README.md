@@ -54,13 +54,13 @@ For the `groups` you can set `account_number` to `ALL`. The given group with the
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.50.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.18.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.50.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.18.0 |
 
 ## Modules
 
